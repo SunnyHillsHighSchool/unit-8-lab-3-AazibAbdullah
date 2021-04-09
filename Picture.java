@@ -366,9 +366,42 @@ public class Picture
     }
   }
 
-   ////////////////////// methods ///////////////////////////////////////
+   ////////////////////// methods///////////////////////
 
-   
+   public void sepiaTone()
+   {
+     // Create a 2 Dimensional Pixel Array and initialize it to the method.
+     Pixel[][] pixels = this.getPixels2D();
 
+     // Create a for loop and loop through both the rows and columns (NEST IT)
+     for (int row = 0; row < pixels.length; row++)
+     {
+       for (int col = 0; col < pixels[row].length; col++)
+       {
+         // Declare 3 variables and set them to the RGB Values
+        int red = pixels[row][col].getRed();
+        int green = pixels[row][col].getGreen();
+        int blue = pixels[row][col].getBlue();
 
+         int newRed = (int)((0.393 * red)+(0.769 * green) + (0.189 * blue));
+         int newGreen = (int)((0.394 * red) + (0.686 * green) + (0.168 * blue));
+         int newBlue = (int)((0.272 * red) + (0.534 * green) + (0.131 * blue));
+
+         if (newRed > 255)
+         {
+           newRed = 255;
+         } else if (newGreen > 255)
+         {
+           newGreen = 255;
+         } else if (newBlue > 255)
+         {
+           newBlue = 255;
+         }
+
+         pixels[row][col].setRed(newRed);
+         pixels[row][col].setGreen(newGreen);
+         pixels[row][col].setBlue(newBlue);
+       }
+     }
+   }
 } // this } is the end of class Picture, put all new methods before this
